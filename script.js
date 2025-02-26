@@ -1,42 +1,38 @@
 $(document).ready(function () {
-    // Tax rates for each country
-    let taxRates = {
-        "UK": 0.25,      // United Kingdom - 25%
-        "IE": 0.125,     // Ireland - 12.5%
-        "NL": 0.258,     // Netherlands - 25.8%
-        "BE": 0.25,      // Belgium - 25%
-        "ZA": 0.27,      // South Africa - 27%
-        "KE": 0.30,      // Kenya - 30%
-        "CA": 0.15,      // Canada - 15% federal
-        "AU": 0.30,      // Australia - 30%
-        "FI": 0.20,      // Finland - 20%
-        "SE": 0.206      // Sweden - 20.6%
+    // Default tax rates by country
+    const taxRates = {
+        "UK": 20, "IE": 23, "NL": 21, "BE": 21, "ZA": 15,
+        "KE": 16, "CA": 5, "AU": 10, "FI": 24, "SE": 25
     };
 
+    let currentTaxRate = 0;
+
+    // Update tax rate based on seller's location
+    function updateTaxRate() {
+        const sellerLocation = $("#sellerLocation").val();
+        currentTaxRate = taxRates[sellerLocation] || 0;
+        
+        $("#salesTaxRate").val(`${currentTaxRate}%`); // Updates the new input box
+        calculateTax();
+    }
+
+    // Calculate tax and update result fields
     function calculateTax() {
-        let price = parseFloat($("#price").val()) || 0;
-        let quantity = parseInt($("#quantity").val()) || 0;
-        let buyerLocation = $("#buyerLocation").val();
-
-        if (price <= 0 || quantity <= 0) {
-            $("#beforeTax").text("$0.00");
-            $("#salesTaxRate").text("0%");
-            $("#salesTax").text("$0.00");
-            $("#totalPrice").text("$0.00");
-            return;
-        }
-
-        let subtotal = price * quantity;
-        let taxRate = taxRates[buyerLocation] || 0; // Sales tax is based on the buyer's location
-        let salesTax = subtotal * taxRate;
-        let totalPrice = subtotal + salesTax;
+        const price = parseFloat($("#price").val()) || 0;
+        const quantity = parseInt($("#quantity").val()) || 0;
+        const subtotal = price * quantity;
+        const salesTax = (subtotal * currentTaxRate) / 100;
+        const totalPrice = subtotal + salesTax;
 
         $("#beforeTax").text(`$${subtotal.toFixed(2)}`);
-        $("#salesTaxRate").text(`${(taxRate * 100).toFixed(1)}%`);
         $("#salesTax").text(`$${salesTax.toFixed(2)}`);
         $("#totalPrice").text(`$${totalPrice.toFixed(2)}`);
     }
 
-    // Trigger calculation whenever an input changes
-    $("#price, #quantity, #buyerLocation").on("input change", calculateTax);
+    // Event listeners for updates
+    $("#sellerLocation").change(updateTaxRate);
+    $("#price, #quantity").on("input", calculateTax);
+
+    // Set initial tax rate on page load
+    updateTaxRate();
 });

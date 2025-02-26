@@ -12,48 +12,77 @@
         <h1>Sales Tax Calculator</h1>
 
         <form id="taxForm">
-            <label>Product Price ($):</label>
-            <input type="number" id="price" required>
+            <!-- Seller Location (Moved to Top) -->
+            <div class="form-group">
+                <label for="sellerLocation">Seller Location:</label>
+                <select id="sellerLocation">
+                    <option value="UK" data-tax="20">🇬🇧 United Kingdom</option>
+                    <option value="IE" data-tax="23">🇮🇪 Ireland</option>
+                    <option value="NL" data-tax="21">🇳🇱 Netherlands</option>
+                    <option value="BE" data-tax="21">🇧🇪 Belgium</option>
+                    <option value="ZA" data-tax="15">🇿🇦 South Africa</option>
+                    <option value="KE" data-tax="16">🇰🇪 Kenya</option>
+                    <option value="CA" data-tax="5">🇨🇦 Canada</option>
+                    <option value="AU" data-tax="10">🇦🇺 Australia</option>
+                    <option value="FI" data-tax="24">🇫🇮 Finland</option>
+                    <option value="SE" data-tax="25">🇸🇪 Sweden</option>
+                </select>
+            </div>
 
-            <label>Quantity:</label>
-            <input type="number" id="quantity" required>
+            <!-- Buyer Location (Moved to Top) -->
+            <div class="form-group">
+                <label for="buyerLocation">Buyer Location:</label>
+                <select id="buyerLocation">
+                    <option value="UK">🇬🇧 United Kingdom</option>
+                    <option value="IE">🇮🇪 Ireland</option>
+                    <option value="NL">🇳🇱 Netherlands</option>
+                    <option value="BE">🇧🇪 Belgium</option>
+                    <option value="ZA">🇿🇦 South Africa</option>
+                    <option value="KE">🇰🇪 Kenya</option>
+                    <option value="CA">🇨🇦 Canada</option>
+                    <option value="AU">🇦🇺 Australia</option>
+                    <option value="FI">🇫🇮 Finland</option>
+                    <option value="SE">🇸🇪 Sweden</option>
+                </select>
+            </div>
 
-            <label>Seller Location:</label>
-            <select id="sellerLocation">
-                <option value="UK">United Kingdom</option>
-                <option value="IE">Ireland</option>
-                <option value="NL">Netherlands</option>
-                <option value="BE">Belgium</option>
-                <option value="ZA">South Africa</option>
-                <option value="KE">Kenya</option>
-                <option value="CA">Canada</option>
-                <option value="AU">Australia</option>
-                <option value="FI">Finland</option>
-                <option value="SE">Sweden</option>
-            </select>
+            <!-- Product Price (Moved Below) -->
+            <div class="form-group">
+                <label for="price">Product Price ($):</label>
+                <input type="number" id="price" required>
+            </div>
 
-            <label>Buyer Location:</label>
-            <select id="buyerLocation">
-                <option value="UK">United Kingdom</option>
-                <option value="IE">Ireland</option>
-                <option value="NL">Netherlands</option>
-                <option value="BE">Belgium</option>
-                <option value="ZA">South Africa</option>
-                <option value="KE">Kenya</option>
-                <option value="CA">Canada</option>
-                <option value="AU">Australia</option>
-                <option value="FI">Finland</option>
-                <option value="SE">Sweden</option>
-            </select>
+            <!-- Quantity (Moved Below) -->
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" required>
+            </div>
 
+            <!-- Sales Tax Rate (Label in Front) -->
+            <div class="form-group">
+                <label for="salesTaxRate">Sales Tax Rate:</label>
+                <div class="input-container">
+                    <span class="prefix">%</span>
+                    <input type="text" id="salesTaxRate" readonly>
+                </div>
+            </div>
         </form>
 
-        <div id="result">
-            <h2>Results:</h2>
-            <p>Before Tax Sales: <span id="beforeTax">$0.00</span></p>
-            <p>Sales Tax Rate: <span id="salesTaxRate">0%</span></p>
-            <p>Sales Tax Amount: <span id="salesTax">$0.00</span></p>
-            <p>Total Price (After Tax): <span id="totalPrice">$0.00</span></p>
+        <!-- Results Section in Box -->
+        <div id="result" class="result-box">
+            <h2>Results</h2>
+            <div class="form-group">
+                <label>Before Tax Sales:</label>
+                <span id="beforeTax">$0.00</span>
+            </div>
+            <div class="form-group">
+                <label>Sales Tax Amount:</label>
+                <span id="salesTax">$0.00</span>
+            </div>
+            <div class="form-group">
+                <label>Total Price (After Tax):</label>
+                <span id="totalPrice">$0.00</span>
+            </div>
         </div>
     </div>
 
