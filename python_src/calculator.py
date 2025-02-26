@@ -56,6 +56,6 @@ def main():
     buy_amount_after = buy_amount_before * (1 + (tax_rate / 100))
 
 
-    print(f"Final Price After Tax: {buy_amount_after:.2f}{currency}")
+    print(f"Final Price After Tax: {currency}{buy_amount_after:.2f}")
 
 main()
