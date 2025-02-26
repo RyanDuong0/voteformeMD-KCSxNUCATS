@@ -30,7 +30,7 @@ tax_rates_with_currency = {
     },
     "FINLAND": {"Tax Rate": 20, "Currency": "€"},
     "SWEDEN": {"Tax Rate": 20.6, "Currency": "kr"},
-    "UNITED STATES": {
+    "USA": {
         "Federal Tax Rate": 21,
         "States": {
             "ALABAMA": 6.5,
