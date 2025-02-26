@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
 }
@@ -19,7 +19,7 @@ body {
     width: 400px;
 }
 
-/* Heading */
+/* Heading (Now Outside the Container) */
 h1 {
     text-align: center;
     margin-bottom: 20px;
@@ -28,8 +28,8 @@ h1 {
 /* Form Group Styling */
 .form-group {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 12px;
 }
 
@@ -60,28 +60,6 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-/* Buttons */
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 4px;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Hide modify tax input initially */
-#customTaxRate, #confirmTaxBtn {
-    display: none;
-}
-
 /* Results Box */
 .result-box {
     background: #e3f2fd;
@@ -97,42 +75,4 @@ button:hover {
 
 .result-box .form-group {
     justify-content: space-between;
-}
-
-#salesTaxRate {
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px;
-    width: 50%;
-    text-align: right;
-    font-size: 16px;
-    cursor: not-allowed;
-}
-
-/* Input container for Sales Tax Rate */
-.input-container {
-    display: flex;
-    align-items: center;
-    width: 50%;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px;
-}
-
-/* Sales Tax Rate Percentage Sign */
-.prefix {
-    font-size: 16px;
-    font-weight: bold;
-    padding-right: 8px;
-}
-
-/* Input Styling */
-#salesTaxRate {
-    border: none;
-    background: transparent;
-    flex: 1;
-    font-size: 16px;
-    text-align: right;
 }
