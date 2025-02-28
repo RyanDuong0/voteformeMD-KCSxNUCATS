@@ -1,10 +1,17 @@
 import csv
 import os
-from flask import Flask
+from flask import Flask, render_template
 
-TAX_DATA_DIR = "PLACEHOLDER"  # Directory where CSV files for each state are stored
-app = Flask(__name__)
-@app.route()
+# Set the correct templates folder path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TEMPLATES_DIR = os.path.abspath(os.path.join(BASE_DIR, "../templates"))
+TAX_DATA_DIR = "PLACEHOLDER"  # Directory where CSV files are stored
+
+app = Flask(__name__, template_folder=TEMPLATES_DIR)
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 def get_tax_rate(state, zip_code):
     """
@@ -18,39 +25,18 @@ def get_tax_rate(state, zip_code):
 
     with open(file_path, mode="r", encoding="utf-8") as file:
         reader = csv.reader(file)
-        header = next(reader)  # Skip header
+        next(reader)  # Skip header
 
         for row in reader:
             if len(row) < 4:
                 continue
             zip_code_csv, state_name, tax_rate, currency = row
-            if zip_code_csv.strip() == zip_code.strip():  # Match zip code
-                return float(tax_rate), currency  # Convert tax_rate to float
+            if zip_code_csv.strip() == zip_code.strip():
+                return float(tax_rate), currency
 
     return None, None
 
-
-def main():
-    state = input("Enter the state you are buying from: ").strip()
-    zip_code = input("Enter the zip code: ").strip()
-
-    try:
-        buy_amount_before = float(input("Enter purchase price before tax: "))
-    except ValueError:
-        print("Invalid input: Please enter a valid numeric value.")
-        return
-
-    tax_rate, currency = get_tax_rate(state, zip_code)
-
-    if tax_rate is None:
-        print(f"Sorry, tax information for {state} (Zip Code: {zip_code}) is not available.")
-        return
-
-    # Calculate final amount with tax
-    buy_amount_after = buy_amount_before * (1 + (tax_rate / 100))
-
-    print(f"Final Price After Tax: {currency}{buy_amount_after:.2f}")
-
-
+# Run Flask app only
 if __name__ == "__main__":
-    main()
+    print(f"Looking for templates in: {TEMPLATES_DIR}")
+    app.run(debug=True)
