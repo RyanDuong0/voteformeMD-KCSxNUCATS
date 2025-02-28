@@ -1,5 +1,6 @@
 import csv
 import os
+from flask import Flask
 
 TAX_DATA_DIR = "PLACEHOLDER"  # Directory where CSV files for each state are stored
 
