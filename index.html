@@ -8,72 +8,65 @@
 </head>
 <body>
     <div class="container">
-        <h1>Sales Tax Calculator</h1>
-        <p>Enter the required details to calculate the sales tax.</p>
-
+        <h2>Sales Tax Calculator</h2>
         <form id="taxForm">
-            <h2>Branch Information</h2>
-            <label for="branch_zip">Branch ZIP Code:</label>
-            <input type="text" id="branch_zip" required>
-
-            <label for="branch_state">Branch State:</label>
-            <input type="text" id="branch_state" required>
-
-            <h2>Customer Information</h2>
-            <label for="customer_name">Name:</label>
-            <input type="text" id="customer_name" required>
-
-            <label for="customer_street">Street:</label>
-            <input type="text" id="customer_street">
-
-            <label for="customer_apt">Apt/Suite:</label>
-            <input type="text" id="customer_apt">
-
-            <label for="customer_city">City:</label>
-            <input type="text" id="customer_city" required>
-
-            <label for="customer_state">State:</label>
-            <input type="text" id="customer_state" required>
-
-            <label for="customer_zip">ZIP Code:</label>
-            <input type="text" id="customer_zip" required>
-
-            <h2>Order Information</h2>
-            <label for="delivery_status">Delivered/Collected?</label>
-            <select id="delivery_status">
+            <h3>Branch Information</h3>
+            <label for="branchZip">Branch Zip Code:</label>
+            <input type="text" id="branchZip" name="branchZip" required>
+            
+            <label for="branchState">Branch State:</label>
+            <input type="text" id="branchState" name="branchState" required>
+            
+            <h3>Customer Information</h3>
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" name="customerName" required>
+            
+            <label for="customerZip">Customer Zip Code:</label>
+            <input type="text" id="customerZip" name="customerZip" required>
+            
+            <label for="customerState">Customer State:</label>
+            <input type="text" id="customerState" name="customerState" required>
+            
+            <label for="street">Street (Optional):</label>
+            <input type="text" id="street" name="street">
+            
+            <label for="aptSuite">Apt/Suite (Optional):</label>
+            <input type="text" id="aptSuite" name="aptSuite">
+            
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+            
+            <label for="delivered">Delivered/Collected?</label>
+            <select id="delivered" name="delivered">
                 <option value="delivered">Delivered</option>
                 <option value="collected">Collected</option>
             </select>
-
+            
+            <h3>Order Details</h3>
+            <label for="orderValues">Order Line Values & Product Tax Override:</label>
+            <input type="text" id="orderValues" name="orderValues">
+            
+            <label for="taxOverrides">Any Other Tax Overrides:</label>
+            <input type="text" id="taxOverrides" name="taxOverrides">
+            
             <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" min="1" required>
-
-            <label for="price">Price per Unit ($):</label>
-            <input type="number" id="price" step="0.01" required>
-
-            <label for="product_override">Product Tax Override (%):</label>
-            <input type="number" id="product_override" step="0.01">
-
-            <label for="other_overrides">Other Tax Overrides:</label>
-            <input type="text" id="other_overrides">
-
-            <button type="button" onclick="calculateTax()">Calculate Tax</button>
+            <input type="number" id="quantity" name="quantity" min="1" required>
+            
+            <label for="price">Product Price ($):</label>
+            <input type="number" step="0.01" id="price" name="price" required>
+            
+            <button type="submit">Calculate Tax</button>
         </form>
-
+        <h3>Output</h3>
         <div id="result">
-            <h2>Tax Calculation Result</h2>
-            <p><strong>Before Sales Tax:</strong> <span id="before_tax"></span></p>
-            <p><strong>Sales Tax Rates:</strong></p>
-            <ul>
-                <li>State: <span id="state_tax"></span></li>
-                <li>County: <span id="county_tax"></span></li>
-                <li>City: <span id="city_tax"></span></li>
-                <li>Extra: <span id="extra_tax"></span></li>
-            </ul>
-            <p><strong>After Sales Tax:</strong> <span id="after_tax"></span></p>
+            <p><strong>Before Sales Tax:</strong> <span id="beforeTax"></span></p>
+            <p><strong>Sales Tax Breakdown:</strong></p>
+            <p>State Tax: <span id="stateTax"></span></p>
+            <p>County Tax: <span id="countyTax"></span></p>
+            <p>City Tax: <span id="cityTax"></span></p>
+            <p>Extra Taxes: <span id="extraTax"></span></p>
+            <p><strong>After Sales Tax:</strong> <span id="afterTax"></span></p>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
