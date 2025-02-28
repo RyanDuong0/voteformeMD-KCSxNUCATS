@@ -1,78 +1,62 @@
-/* General Page Styling */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Container */
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 400px;
-}
-
-/* Heading (Now Outside the Container) */
-h1 {
     text-align: center;
-    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    margin: 20px;
 }
 
-/* Form Group Styling */
-.form-group {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-}
-
-.form-group label {
+.container {
     width: 50%;
-    text-align: right;
-    margin-right: 10px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2c3e50;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
     font-weight: bold;
 }
 
-/* Inputs and Select */
 input, select {
-    width: 50%;
+    width: 100%;
     padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 16px;
 }
 
-/* Remove Number Input Spinners */
-input[type="number"] {
-    -moz-appearance: textfield;
+button:hover {
+    background-color: #2980b9;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* Results Box */
-.result-box {
-    background: #e3f2fd;
-    padding: 15px;
-    border-radius: 5px;
+#result {
     margin-top: 20px;
+    padding: 15px;
+    background-color: #e3f2fd;
+    border-radius: 5px;
 }
 
-.result-box h2 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.result-box .form-group {
-    justify-content: space-between;
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
 }

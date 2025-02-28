@@ -5,93 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Tax Calculator</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 </head>
 <body>
-    <h1>Sales Tax Calculator</h1> <!-- Moved outside the container -->
-
     <div class="container">
+        <h1>Sales Tax Calculator</h1>
+        <p>Enter the required details to calculate the sales tax.</p>
+
         <form id="taxForm">
-            <!-- Currency Selection -->
-            <div class="form-group">
-                <label for="currency">Currency</label>
-                <select id="currency">
-                    <option value="USD">🇺🇸 USD</option>
-                    <option value="GBP">🇬🇧 GBP</option>
-                    <option value="EUR">🇪🇺 EUR</option>
-                    <option value="CAD">🇨🇦 CAD</option>
-                    <option value="AUD">🇦🇺 AUD</option>
-                </select>
-            </div>
+            <h2>Branch Information</h2>
+            <label for="branch_zip">Branch ZIP Code:</label>
+            <input type="text" id="branch_zip" required>
 
-            <!-- Seller Location -->
-            <div class="form-group">
-                <label for="sellerLocation">Seller Location</label>
-                <select id="sellerLocation">
-                    <option value="UK" data-tax="25">🇬🇧 United Kingdom</option>
-                    <option value="IE" data-tax="12.5">🇮🇪 Ireland</option>
-                    <option value="NL" data-tax="25.8">🇳🇱 Netherlands</option>
-                    <option value="BE" data-tax="25">🇧🇪 Belgium</option>
-                    <option value="ZA" data-tax="27">🇿🇦 South Africa</option>
-                    <option value="KE" data-tax="30">🇰🇪 Kenya</option>
-                    <option value="CA" data-tax="15">🇨🇦 Canada</option>
-                    <option value="AU" data-tax="30">🇦🇺 Australia</option>
-                    <option value="FI" data-tax="20">🇫🇮 Finland</option>
-                    <option value="SE" data-tax="20.6">🇸🇪 Sweden</option>
-                </select>
-            </div>
+            <label for="branch_state">Branch State:</label>
+            <input type="text" id="branch_state" required>
 
-            <!-- Buyer Location -->
-            <div class="form-group">
-                <label for="buyerLocation">Buyer Location</label>
-                <select id="buyerLocation">
-                    <option value="UK">🇬🇧 United Kingdom</option>
-                    <option value="IE">🇮🇪 Ireland</option>
-                    <option value="NL">🇳🇱 Netherlands</option>
-                    <option value="BE">🇧🇪 Belgium</option>
-                    <option value="ZA">🇿🇦 South Africa</option>
-                    <option value="KE">🇰🇪 Kenya</option>
-                    <option value="CA">🇨🇦 Canada</option>
-                    <option value="AU">🇦🇺 Australia</option>
-                    <option value="FI">🇫🇮 Finland</option>
-                    <option value="SE">🇸🇪 Sweden</option>
-                </select>
-            </div>
+            <h2>Customer Information</h2>
+            <label for="customer_name">Name:</label>
+            <input type="text" id="customer_name" required>
 
-            <!-- Sales Tax Rate (Now Left-Aligned) -->
-            <div class="form-group">
-                <label for="salesTaxRate">Sales Tax Rate (%)</label>
-                <input type="text" id="salesTaxRate" readonly>
-            </div>
+            <label for="customer_street">Street:</label>
+            <input type="text" id="customer_street">
 
-            <!-- Product Price -->
-            <div class="form-group">
-                <label for="price">Product Price</label>
-                <input type="number" id="price" required>
-            </div>
+            <label for="customer_apt">Apt/Suite:</label>
+            <input type="text" id="customer_apt">
 
-            <!-- Quantity -->
-            <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="number" id="quantity" required>
-            </div>
+            <label for="customer_city">City:</label>
+            <input type="text" id="customer_city" required>
+
+            <label for="customer_state">State:</label>
+            <input type="text" id="customer_state" required>
+
+            <label for="customer_zip">ZIP Code:</label>
+            <input type="text" id="customer_zip" required>
+
+            <h2>Order Information</h2>
+            <label for="delivery_status">Delivered/Collected?</label>
+            <select id="delivery_status">
+                <option value="delivered">Delivered</option>
+                <option value="collected">Collected</option>
+            </select>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" min="1" required>
+
+            <label for="price">Price per Unit ($):</label>
+            <input type="number" id="price" step="0.01" required>
+
+            <label for="product_override">Product Tax Override (%):</label>
+            <input type="number" id="product_override" step="0.01">
+
+            <label for="other_overrides">Other Tax Overrides:</label>
+            <input type="text" id="other_overrides">
+
+            <button type="button" onclick="calculateTax()">Calculate Tax</button>
         </form>
 
-        <!-- Results Section Styled in a Box -->
-        <div id="result" class="result-box">
-            <h2>Results</h2>
-            <div class="form-group">
-                <label>Before Tax Sales:</label>
-                <input type="text" id="beforeTax" readonly>
-            </div>
-            <div class="form-group">
-                <label>Sales Tax Amount:</label>
-                <input type="text" id="salesTax" readonly>
-            </div>
-            <div class="form-group">
-                <label>Total Price (After Tax):</label>
-                <input type="text" id="totalPrice" readonly>
-            </div>
+        <div id="result">
+            <h2>Tax Calculation Result</h2>
+            <p><strong>Before Sales Tax:</strong> <span id="before_tax"></span></p>
+            <p><strong>Sales Tax Rates:</strong></p>
+            <ul>
+                <li>State: <span id="state_tax"></span></li>
+                <li>County: <span id="county_tax"></span></li>
+                <li>City: <span id="city_tax"></span></li>
+                <li>Extra: <span id="extra_tax"></span></li>
+            </ul>
+            <p><strong>After Sales Tax:</strong> <span id="after_tax"></span></p>
         </div>
     </div>
 
