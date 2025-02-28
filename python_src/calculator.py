@@ -3,6 +3,8 @@ import os
 from flask import Flask
 
 TAX_DATA_DIR = "PLACEHOLDER"  # Directory where CSV files for each state are stored
+app = Flask(__name__)
+@app.route()
 
 def get_tax_rate(state, zip_code):
     """
