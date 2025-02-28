@@ -1,78 +1,60 @@
-/* General Page Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
-/* Container */
 .container {
     background: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 400px;
 }
 
-/* Heading (Now Outside the Container) */
-h1 {
+h2, h3 {
     text-align: center;
-    margin-bottom: 20px;
 }
 
-/* Form Group Styling */
-.form-group {
+form {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
+    flex-direction: column;
 }
 
-.form-group label {
-    width: 50%;
-    text-align: right;
-    margin-right: 10px;
+label {
+    margin-top: 10px;
     font-weight: bold;
 }
 
-/* Inputs and Select */
 input, select {
-    width: 50%;
     padding: 8px;
+    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    width: 100%;
 }
 
-/* Remove Number Input Spinners */
-input[type="number"] {
-    -moz-appearance: textfield;
+button {
+    margin-top: 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+button:hover {
+    background: #218838;
 }
 
-/* Results Box */
-.result-box {
-    background: #e3f2fd;
-    padding: 15px;
-    border-radius: 5px;
+#result {
     margin-top: 20px;
-}
-
-.result-box h2 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.result-box .form-group {
-    justify-content: space-between;
+    padding: 15px;
+    background: #e9ecef;
+    border-radius: 5px;
 }
