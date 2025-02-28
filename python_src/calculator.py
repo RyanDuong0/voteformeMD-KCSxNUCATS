@@ -6,8 +6,9 @@ from flask import Flask, render_template
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATES_DIR = os.path.abspath(os.path.join(BASE_DIR, "../templates"))
 TAX_DATA_DIR = "PLACEHOLDER"  # Directory where CSV files are stored
+STATIC_DIR = os.path.abspath(os.path.join(BASE_DIR, "../static"))
 
-app = Flask(__name__, template_folder=TEMPLATES_DIR)
+app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 
 @app.route("/")
 def home():
@@ -38,5 +39,4 @@ def get_tax_rate(state, zip_code):
 
 # Run Flask app only
 if __name__ == "__main__":
-    print(f"Looking for templates in: {TEMPLATES_DIR}")
     app.run(debug=True)
