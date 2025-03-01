@@ -1,6 +1,6 @@
 import csv
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # Set the correct templates folder path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -10,8 +10,12 @@ STATIC_DIR = os.path.abspath(os.path.join(BASE_DIR, "../static"))
 
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home():
+    # if request.method == "GET":
+    #     currency = request.form.get("currency")
+    #     print(f"You selected: {currency}")
+    #     return f"You selected: {currency}"
     return render_template("index.html")
 TAX_DATA_DIR = "taxRateStates"  # Directory where CSV files for each state are stored
 
