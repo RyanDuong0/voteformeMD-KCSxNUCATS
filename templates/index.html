@@ -68,5 +68,33 @@
             <p><strong>After Sales Tax:</strong> <span id="afterTax"></span></p>
         </div>
     </div>
+       <script>
+        document.getElementById("taxForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from reloading the page
+
+            let formData = new FormData(this);
+
+            fetch("/", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                // Populate results in the HTML
+                document.getElementById("beforeTax").innerText = data.before_tax;
+                document.getElementById("stateTax").innerText = data.state_tax;
+                document.getElementById("countyTax").innerText = data.county_tax;
+                document.getElementById("cityTax").innerText = data.city_tax;
+                document.getElementById("extraTax").innerText = data.special_tax;
+                document.getElementById("afterTax").innerText = data.after_tax;
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
 </body>
 </html>
